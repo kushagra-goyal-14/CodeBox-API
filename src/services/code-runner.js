@@ -73,15 +73,13 @@ async function runCode(json_msg) {
     console.log(error);
     if (error.status === "Failed") {
       console.log(error);
+      await deletingTempFiles();
       return error;
     } else if (error.status === "Runtime Error") {
       console.log("Error ---------->" + error);
-      let ans = {
-        status: "Runtime Error",
-        stderr: error,
-      };
-      console.log(ans);
-      return ans;
+      console.log(error);
+      await deletingTempFiles();
+      return error;
     }
     await deletingTempFiles();
   }
